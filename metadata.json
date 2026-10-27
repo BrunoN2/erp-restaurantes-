@@ -1,0 +1,6 @@
+{
+  "name": "Mise - Sistema de Gestão Empresarial & Gastronômica",
+  "description": "ERP completo com Gestão Financeira, Estoque e Logística, Faturamento e Fiscal, Vendas e CRM, Compras, RH e Inteligência de CMV em tempo real.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
