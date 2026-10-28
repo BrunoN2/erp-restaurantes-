@@ -113,24 +113,24 @@ export const QuickSaleModal: React.FC<QuickSaleModalProps> = ({ isOpen, onClose 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
+      <div className="bg-white border border-slate-200/90 rounded-3xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden text-slate-900">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-950/40">
+        <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/70">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-emerald-500/20 text-emerald-400">
+            <div className="p-2.5 rounded-2xl bg-emerald-100 text-emerald-800">
               <ShoppingCart className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-white">Novo Pedido / Venda Comercial</h2>
-              <p className="text-xs text-slate-400">
+              <h2 className="text-base font-extrabold text-slate-900">Novo Pedido / Venda Comercial</h2>
+              <p className="text-xs text-slate-500 font-medium">
                 Baixa automática de insumos no estoque + lançamento de receita no financeiro
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"
+            className="p-1 rounded-xl text-slate-400 hover:text-slate-800 hover:bg-slate-100 cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -140,13 +140,13 @@ export const QuickSaleModal: React.FC<QuickSaleModalProps> = ({ isOpen, onClose 
         <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-6 space-y-5">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+              <label className="block text-xs font-bold text-slate-700 mb-1.5">
                 Cliente (CRM)
               </label>
               <select
                 value={customerId}
                 onChange={(e) => setCustomerId(e.target.value)}
-                className="w-full text-xs bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-amber-500"
+                className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-slate-900 focus:outline-none focus:border-amber-500 font-medium cursor-pointer"
               >
                 {customers.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -157,13 +157,13 @@ export const QuickSaleModal: React.FC<QuickSaleModalProps> = ({ isOpen, onClose 
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+              <label className="block text-xs font-bold text-slate-700 mb-1.5">
                 Canal de Venda
               </label>
               <select
                 value={channel}
                 onChange={(e) => setChannel(e.target.value as any)}
-                className="w-full text-xs bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-amber-500"
+                className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-slate-900 focus:outline-none focus:border-amber-500 font-medium cursor-pointer"
               >
                 <option value="SALAO">Salão (Mesas & Presencial)</option>
                 <option value="DELIVERY">Delivery (iFood / Próprio)</option>
@@ -176,13 +176,13 @@ export const QuickSaleModal: React.FC<QuickSaleModalProps> = ({ isOpen, onClose 
           {/* Items Table */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="text-xs font-semibold text-slate-300">
+              <label className="text-xs font-bold text-slate-700">
                 Itens do Cardápio / Fichas Técnicas
               </label>
               <button
                 type="button"
                 onClick={handleAddItem}
-                className="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1"
+                className="text-xs font-bold text-amber-700 hover:text-amber-800 flex items-center gap-1 cursor-pointer"
               >
                 <Plus className="w-3.5 h-3.5" /> Adicionar Item
               </button>
@@ -192,13 +192,13 @@ export const QuickSaleModal: React.FC<QuickSaleModalProps> = ({ isOpen, onClose 
               {items.map((item, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-950/70 border border-slate-800"
+                  className="flex items-center gap-2 p-2.5 rounded-2xl bg-slate-50 border border-slate-200/80"
                 >
                   <div className="flex-1 min-w-0">
                     <select
                       value={item.recipeCardId}
                       onChange={(e) => handleItemSelect(idx, e.target.value)}
-                      className="w-full text-xs bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-white focus:outline-none focus:border-amber-500 truncate"
+                      className="w-full text-xs bg-white border border-slate-200 rounded-xl px-2.5 py-1.5 text-slate-900 focus:outline-none focus:border-amber-500 truncate font-medium cursor-pointer"
                     >
                       {recipes.map((r) => (
                         <option key={r.id} value={r.id}>
@@ -214,18 +214,18 @@ export const QuickSaleModal: React.FC<QuickSaleModalProps> = ({ isOpen, onClose 
                       min="1"
                       value={item.quantity}
                       onChange={(e) => handleQuantityChange(idx, parseInt(e.target.value) || 1)}
-                      className="w-full text-xs text-center bg-slate-900 border border-slate-700 rounded-lg py-1.5 text-white focus:outline-none focus:border-amber-500 font-mono"
+                      className="w-full text-xs text-center bg-white border border-slate-200 rounded-xl py-1.5 text-slate-900 focus:outline-none focus:border-amber-500 font-mono font-bold"
                     />
                   </div>
 
-                  <div className="w-24 text-right font-mono text-xs text-amber-300 font-semibold">
+                  <div className="w-24 text-right font-mono text-xs text-slate-900 font-bold">
                     R$ {item.subtotal.toFixed(2)}
                   </div>
 
                   <button
                     type="button"
                     onClick={() => handleRemoveItem(idx)}
-                    className="p-1 text-slate-400 hover:text-rose-400 rounded transition-colors"
+                    className="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg transition-colors cursor-pointer"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -236,13 +236,13 @@ export const QuickSaleModal: React.FC<QuickSaleModalProps> = ({ isOpen, onClose 
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+              <label className="block text-xs font-bold text-slate-700 mb-1.5">
                 Forma de Pagamento
               </label>
               <select
                 value={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value as any)}
-                className="w-full text-xs bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-amber-500"
+                className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-slate-900 focus:outline-none focus:border-amber-500 font-medium cursor-pointer"
               >
                 <option value="PIX">Pix Instantâneo (Liquidação imediata)</option>
                 <option value="CARTAO_CREDITO">Cartão de Crédito</option>
@@ -253,7 +253,7 @@ export const QuickSaleModal: React.FC<QuickSaleModalProps> = ({ isOpen, onClose 
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+              <label className="block text-xs font-bold text-slate-700 mb-1.5">
                 Observações do Pedido
               </label>
               <input
@@ -261,24 +261,24 @@ export const QuickSaleModal: React.FC<QuickSaleModalProps> = ({ isOpen, onClose 
                 placeholder="Ex: Ponto da carne ao ponto para mais..."
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                className="w-full text-xs bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-amber-500"
+                className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-slate-900 focus:outline-none focus:border-amber-500 font-medium"
               />
             </div>
           </div>
 
-          {/* Cross-Module Explanation Box */}
-          <div className="p-3.5 rounded-xl bg-slate-950/80 border border-amber-500/20 text-[11px] text-slate-400 space-y-1">
-            <span className="font-bold text-amber-400 block">Sincronização em Tempo Real (Banco Único):</span>
+          {/* Sync explanation */}
+          <div className="p-3.5 rounded-2xl bg-amber-50 border border-amber-200/70 text-[11px] text-amber-900 space-y-1">
+            <span className="font-bold block">Sincronização em Tempo Real (Banco Único):</span>
             <p>
               Ao confirmar este pedido, o sistema abaterá automaticamente os gramas de Filé, Arroz e Azeite cadastrados na ficha técnica de cada prato, registrará a receita no Financeiro e atualizará o LTV do cliente no CRM.
             </p>
           </div>
 
           {/* Total Bar */}
-          <div className="p-4 rounded-xl bg-emerald-950/30 border border-emerald-500/30 flex items-center justify-between">
+          <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between">
             <div>
-              <span className="text-xs text-emerald-300 font-medium">Total do Pedido:</span>
-              <p className="text-xl font-extrabold text-white font-mono">
+              <span className="text-xs text-slate-500 font-bold">Total do Pedido:</span>
+              <p className="text-2xl font-black text-slate-900 font-mono">
                 R$ {totalAmount.toFixed(2)}
               </p>
             </div>
@@ -286,13 +286,13 @@ export const QuickSaleModal: React.FC<QuickSaleModalProps> = ({ isOpen, onClose 
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:bg-slate-800"
+                className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-200 cursor-pointer"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
-                className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-lg shadow-emerald-600/30 flex items-center gap-1.5 transition-all"
+                className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md transition-all flex items-center gap-1.5 cursor-pointer"
               >
                 <CheckCircle className="w-4 h-4" />
                 <span>Confirmar & Baixar Estoque</span>

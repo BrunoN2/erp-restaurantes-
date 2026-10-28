@@ -130,44 +130,44 @@ export const PurchasesModule: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Sub-Navigation */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/80 pb-3">
-        <div className="flex items-center gap-1.5 p-1 bg-slate-900/90 rounded-xl border border-slate-800/80">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200/90 pb-3">
+        <div className="flex items-center gap-1.5 p-1 bg-white rounded-2xl border border-slate-200/90 shadow-2xs">
           <button
             onClick={() => setActiveSubTab('ORDENS')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeSubTab === 'ORDENS'
-                ? 'bg-amber-500 text-slate-950 shadow-sm'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-amber-500 text-slate-950 shadow-xs'
+                : 'text-slate-600 hover:text-slate-950 hover:bg-slate-50'
             }`}
           >
             Ordens de Compra ({purchaseOrders.length})
           </button>
           <button
             onClick={() => setActiveSubTab('SUGESTAO')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeSubTab === 'SUGESTAO'
-                ? 'bg-amber-500 text-slate-950 shadow-sm'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-amber-500 text-slate-950 shadow-xs'
+                : 'text-slate-600 hover:text-slate-950 hover:bg-slate-50'
             }`}
           >
             Sugestão de Reposição Inteligente
           </button>
           <button
             onClick={() => setActiveSubTab('FORNECEDORES')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeSubTab === 'FORNECEDORES'
-                ? 'bg-amber-500 text-slate-950 shadow-sm'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-amber-500 text-slate-950 shadow-xs'
+                : 'text-slate-600 hover:text-slate-950 hover:bg-slate-50'
             }`}
           >
             Fornecedores Homologados ({suppliers.length})
           </button>
           <button
             onClick={() => setActiveSubTab('COTACOES')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeSubTab === 'COTACOES'
-                ? 'bg-amber-500 text-slate-950 shadow-sm'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-amber-500 text-slate-950 shadow-xs'
+                : 'text-slate-600 hover:text-slate-950 hover:bg-slate-50'
             }`}
           >
             Mapa Comparativo de Cotações
@@ -178,7 +178,7 @@ export const PurchasesModule: React.FC = () => {
           {activeSubTab === 'FORNECEDORES' ? (
             <button
               onClick={() => setIsNewSupModalOpen(true)}
-              className="px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold flex items-center gap-1.5 shadow-md shadow-amber-500/20"
+              className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold flex items-center gap-1.5 shadow-xs transition-all cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Novo Fornecedor</span>
@@ -186,7 +186,7 @@ export const PurchasesModule: React.FC = () => {
           ) : (
             <button
               onClick={() => setIsNewPoModalOpen(true)}
-              className="px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold flex items-center gap-1.5 shadow-md shadow-amber-500/20"
+              className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold flex items-center gap-1.5 shadow-xs transition-all cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Nova Ordem de Compra</span>
@@ -198,78 +198,78 @@ export const PurchasesModule: React.FC = () => {
       {/* VIEW 1: Ordens de Compra */}
       {activeSubTab === 'ORDENS' && (
         <div className="space-y-4">
-          <div className="bg-slate-900/90 border border-slate-800/80 rounded-2xl overflow-hidden shadow-lg">
+          <div className="bg-white border border-slate-200/90 rounded-3xl overflow-hidden shadow-xs">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-950/70 border-b border-slate-800/80 text-slate-400 font-semibold uppercase text-[10px] tracking-wider">
+                <thead className="bg-slate-50/80 border-b border-slate-200/80 text-slate-500 font-bold uppercase text-[10px] tracking-wider">
                   <tr>
-                    <th className="py-3 px-4">Nº Ordem / Emissão</th>
-                    <th className="py-3 px-4">Fornecedor</th>
-                    <th className="py-3 px-4">Previsão Entrega</th>
-                    <th className="py-3 px-4">Itens Solicitados</th>
-                    <th className="py-3 px-4 text-right">Valor Total</th>
-                    <th className="py-3 px-4 text-center">Status</th>
-                    <th className="py-3 px-4 text-center">Ações Integradas</th>
+                    <th className="py-3.5 px-4">Nº Ordem / Emissão</th>
+                    <th className="py-3.5 px-4">Fornecedor</th>
+                    <th className="py-3.5 px-4">Previsão Entrega</th>
+                    <th className="py-3.5 px-4">Itens Solicitados</th>
+                    <th className="py-3.5 px-4 text-right">Valor Total</th>
+                    <th className="py-3.5 px-4 text-center">Status</th>
+                    <th className="py-3.5 px-4 text-center">Ações Integradas</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800/60">
+                <tbody className="divide-y divide-slate-100">
                   {purchaseOrders.map((po) => (
-                    <tr key={po.id} className="hover:bg-slate-800/40">
-                      <td className="py-3 px-4">
-                        <span className="font-mono font-bold text-white block">{po.orderNumber}</span>
-                        <span className="text-[10px] text-slate-500 font-mono">{po.issueDate}</span>
+                    <tr key={po.id} className="hover:bg-slate-50/80">
+                      <td className="py-3.5 px-4">
+                        <span className="font-mono font-bold text-slate-900 block">{po.orderNumber}</span>
+                        <span className="text-[10px] text-slate-400 font-mono">{po.issueDate}</span>
                       </td>
 
-                      <td className="py-3 px-4 font-semibold text-slate-200">{po.supplierName}</td>
+                      <td className="py-3.5 px-4 font-bold text-slate-800">{po.supplierName}</td>
 
-                      <td className="py-3 px-4 font-mono text-slate-400">{po.deliveryDateExpected}</td>
+                      <td className="py-3.5 px-4 font-mono text-slate-500">{po.deliveryDateExpected}</td>
 
-                      <td className="py-3 px-4 text-slate-300 max-w-xs truncate">
+                      <td className="py-3.5 px-4 text-slate-700 max-w-xs truncate font-medium">
                         {po.items.map((it) => `${it.quantity} ${it.unit} de ${it.itemName}`).join(', ')}
                       </td>
 
-                      <td className="py-3 px-4 text-right font-mono font-bold text-white text-sm">
+                      <td className="py-3.5 px-4 text-right font-mono font-black text-slate-900 text-sm">
                         R$ {po.totalAmount.toFixed(2)}
                       </td>
 
-                      <td className="py-3 px-4 text-center">
+                      <td className="py-3.5 px-4 text-center">
                         <span
-                          className={`px-2 py-0.5 text-[10px] font-bold rounded-full ${
+                          className={`px-2.5 py-0.5 text-[10px] font-bold rounded-full ${
                             po.status === 'RECEBIDA'
-                              ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                              ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
                               : po.status === 'ENVIADA_FORNECEDOR'
-                              ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30'
-                              : 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                              ? 'bg-blue-100 text-blue-800 border border-blue-200'
+                              : 'bg-amber-100 text-amber-800 border border-amber-200'
                           }`}
                         >
                           {po.status.replace('_', ' ')}
                         </span>
                       </td>
 
-                      <td className="py-3 px-4 text-center">
+                      <td className="py-3.5 px-4 text-center">
                         <div className="flex items-center justify-center gap-1.5">
                           {/* Send WhatsApp */}
                           <button
                             onClick={() => handleSendWhatsapp(po)}
                             title="Disparar pedido formatado para o WhatsApp do vendedor"
-                            className="p-1.5 rounded-lg bg-emerald-600/20 text-emerald-300 hover:bg-emerald-600 hover:text-white transition-colors"
+                            className="p-1.5 rounded-xl bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white transition-colors cursor-pointer border border-emerald-200"
                           >
                             <Send className="w-3.5 h-3.5" />
                           </button>
 
-                          {/* Receive Delivery (Cross-Module Stock & Financial Trigger) */}
+                          {/* Receive Delivery */}
                           {po.status !== 'RECEBIDA' ? (
                             <button
                               onClick={() => receivePurchaseOrder(po.id)}
                               title="Dar entrada no estoque e gerar conta a pagar no financeiro"
-                              className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-emerald-600 hover:text-white text-slate-200 text-[11px] font-semibold transition-all flex items-center gap-1"
+                              className="px-3 py-1 rounded-xl bg-slate-100 hover:bg-emerald-600 hover:text-white text-slate-800 text-[11px] font-bold transition-all flex items-center gap-1 cursor-pointer"
                             >
                               <Check className="w-3 h-3" />
                               <span>Receber</span>
                             </button>
                           ) : (
-                            <span className="text-[11px] text-emerald-400 flex items-center gap-1">
-                              <CheckCircle2 className="w-3 h-3" />
+                            <span className="text-[11px] text-emerald-700 font-bold flex items-center gap-1">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                               Entregue
                             </span>
                           )}
@@ -287,14 +287,14 @@ export const PurchasesModule: React.FC = () => {
       {/* VIEW 2: Sugestão de Reposição Inteligente */}
       {activeSubTab === 'SUGESTAO' && (
         <div className="space-y-4">
-          <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between">
+          <div className="p-5 rounded-3xl bg-white border border-slate-200/90 shadow-xs flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-amber-500/20 text-amber-400">
+              <div className="p-2.5 rounded-2xl bg-amber-100 text-amber-800">
                 <Sparkles className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-white">Previsão de Demanda & Reposição Automática</h3>
-                <p className="text-xs text-slate-400">
+                <h3 className="text-sm font-extrabold text-slate-900">Previsão de Demanda & Reposição Automática</h3>
+                <p className="text-xs text-slate-500">
                   O sistema analisa o ponto de pedido e sugere a quantidade exata para compra sem gerar desperdício
                 </p>
               </div>
@@ -309,31 +309,31 @@ export const PurchasesModule: React.FC = () => {
               return (
                 <div
                   key={item.id}
-                  className="p-5 rounded-2xl bg-slate-900/90 border border-amber-500/30 shadow-lg space-y-3 flex flex-col justify-between"
+                  className="p-6 rounded-3xl bg-white border border-amber-200/90 shadow-xs space-y-3 flex flex-col justify-between hover:shadow-md transition-shadow"
                 >
                   <div>
                     <div className="flex items-center justify-between text-xs mb-1">
-                      <span className="font-mono text-amber-400 font-bold">{item.code}</span>
-                      <span className="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-bold text-[10px]">
+                      <span className="font-mono text-amber-800 font-bold">{item.code}</span>
+                      <span className="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 font-bold text-[10px]">
                         Estoque Baixo
                       </span>
                     </div>
 
-                    <h4 className="text-base font-bold text-white">{item.name}</h4>
-                    <p className="text-xs text-slate-400">
-                      Saldo Atual: <strong className="text-rose-400">{item.currentStock} {item.unit}</strong> | Mínimo: {item.minStock} {item.unit}
+                    <h4 className="text-base font-black text-slate-900">{item.name}</h4>
+                    <p className="text-xs text-slate-500">
+                      Saldo Atual: <strong className="text-rose-700">{item.currentStock} {item.unit}</strong> | Mínimo: {item.minStock} {item.unit}
                     </p>
 
-                    <div className="mt-3 p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
+                    <div className="mt-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1">
                       <div className="flex justify-between text-xs">
-                        <span className="text-slate-400">Sugestão de Compra:</span>
-                        <span className="font-mono font-bold text-emerald-400">
+                        <span className="text-slate-500 font-medium">Sugestão de Compra:</span>
+                        <span className="font-mono font-bold text-emerald-700">
                           {suggestedBuy} {item.unit}
                         </span>
                       </div>
                       <div className="flex justify-between text-xs">
-                        <span className="text-slate-400">Custo Estimado:</span>
-                        <span className="font-mono font-bold text-white">
+                        <span className="text-slate-500 font-medium">Custo Estimado:</span>
+                        <span className="font-mono font-bold text-slate-900">
                           R$ {estimatedCost.toFixed(2)}
                         </span>
                       </div>
@@ -365,7 +365,7 @@ export const PurchasesModule: React.FC = () => {
                       });
                       setActiveSubTab('ORDENS');
                     }}
-                    className="w-full py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold shadow-md shadow-amber-500/20 transition-all flex items-center justify-center gap-1.5"
+                    className="w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold shadow-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                   >
                     <ShoppingCart className="w-3.5 h-3.5" />
                     <span>Gerar Pedido Automático</span>
@@ -383,37 +383,37 @@ export const PurchasesModule: React.FC = () => {
           {suppliers.map((sup) => (
             <div
               key={sup.id}
-              className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800/80 shadow-lg space-y-3"
+              className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-xs space-y-3 hover:shadow-md transition-shadow"
             >
               <div className="flex items-center justify-between">
-                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-300 border border-amber-500/20">
+                <span className="px-2.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-200">
                   {sup.category}
                 </span>
-                <div className="flex items-center gap-1 text-amber-400 text-xs font-bold">
-                  <Star className="w-3.5 h-3.5 fill-amber-400" />
+                <div className="flex items-center gap-1 text-amber-600 text-xs font-bold">
+                  <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
                   <span>{sup.rating.toFixed(1)}</span>
                 </div>
               </div>
 
               <div>
-                <h4 className="text-base font-bold text-white">{sup.tradeName}</h4>
-                <p className="text-xs text-slate-400">{sup.name}</p>
-                <p className="text-[10px] font-mono text-slate-500">CNPJ: {sup.cnpj}</p>
+                <h4 className="text-base font-black text-slate-900">{sup.tradeName}</h4>
+                <p className="text-xs text-slate-600 font-medium">{sup.name}</p>
+                <p className="text-[10px] font-mono text-slate-400">CNPJ: {sup.cnpj}</p>
               </div>
 
-              <div className="space-y-1 text-xs text-slate-300 pt-1">
+              <div className="space-y-1 text-xs text-slate-600 pt-1">
                 <div className="flex items-center gap-2">
-                  <Phone className="w-3.5 h-3.5 text-slate-500" />
+                  <Phone className="w-3.5 h-3.5 text-slate-400" />
                   <span>{sup.phone} ({sup.contactName})</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Mail className="w-3.5 h-3.5 text-slate-500" />
+                  <Mail className="w-3.5 h-3.5 text-slate-400" />
                   <span>{sup.email}</span>
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-slate-800 text-[11px] text-slate-400">
-                Condições de Pagamento: <strong className="text-slate-200">{sup.paymentTerms}</strong>
+              <div className="pt-2 border-t border-slate-100 text-[11px] text-slate-500">
+                Condições de Pagamento: <strong className="text-slate-800">{sup.paymentTerms}</strong>
               </div>
             </div>
           ))}
@@ -426,14 +426,14 @@ export const PurchasesModule: React.FC = () => {
           {quotations.map((quot) => (
             <div
               key={quot.id}
-              className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-lg space-y-4"
+              className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-xs space-y-4"
             >
-              <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <div>
-                  <h4 className="text-sm font-bold text-white">{quot.title}</h4>
+                  <h4 className="text-sm font-extrabold text-slate-900">{quot.title}</h4>
                   <span className="text-xs text-slate-400 font-mono">Data: {quot.date}</span>
                 </div>
-                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300">
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
                   {quot.status}
                 </span>
               </div>
@@ -442,24 +442,24 @@ export const PurchasesModule: React.FC = () => {
                 {quot.supplierOffers.map((off, idx) => (
                   <div
                     key={idx}
-                    className={`p-3.5 rounded-xl border ${
+                    className={`p-4 rounded-2xl border ${
                       off.isWinner
-                        ? 'bg-emerald-950/20 border-emerald-500/50 shadow-md'
-                        : 'bg-slate-950 border-slate-800'
+                        ? 'bg-emerald-50/70 border-emerald-300 shadow-xs'
+                        : 'bg-slate-50 border-slate-200'
                     }`}
                   >
                     <div className="flex items-center justify-between text-xs mb-1">
-                      <span className="font-semibold text-white">{off.supplierName}</span>
+                      <span className="font-bold text-slate-900">{off.supplierName}</span>
                       {off.isWinner && (
-                        <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/20 px-1.5 py-0.2 rounded">
+                        <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.2 rounded-full">
                           MELHOR PREÇO
                         </span>
                       )}
                     </div>
-                    <div className="text-lg font-mono font-black text-white mt-2">
+                    <div className="text-lg font-mono font-black text-slate-900 mt-2">
                       R$ {off.totalOffered.toFixed(2)}
                     </div>
-                    <span className="text-[11px] text-slate-400 block mt-0.5">
+                    <span className="text-[11px] text-slate-500 block mt-0.5">
                       Prazo de entrega: {off.deliveryTimeDays} dias
                     </span>
                   </div>
@@ -472,16 +472,16 @@ export const PurchasesModule: React.FC = () => {
 
       {/* Modal: Nova Ordem de Compra */}
       {isNewPoModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-md p-6 shadow-2xl space-y-4">
-            <h3 className="text-base font-bold text-white">Criar Ordem de Compra (OC)</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
+          <div className="bg-white border border-slate-200/90 rounded-3xl w-full max-w-md p-6 sm:p-7 shadow-2xl space-y-4 text-slate-900">
+            <h3 className="text-base font-extrabold text-slate-900">Criar Ordem de Compra (OC)</h3>
             <form onSubmit={handleCreatePo} className="space-y-3">
               <div>
-                <label className="block text-xs text-slate-300 mb-1">Fornecedor Homologado</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Fornecedor Homologado</label>
                 <select
                   value={selectedSupplierId}
                   onChange={(e) => setSelectedSupplierId(e.target.value)}
-                  className="w-full text-xs bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"
+                  className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 font-medium cursor-pointer"
                 >
                   {suppliers.map((s) => (
                     <option key={s.id} value={s.id}>
@@ -492,11 +492,11 @@ export const PurchasesModule: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-xs text-slate-300 mb-1">Insumo a Adquirir</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Insumo a Adquirir</label>
                 <select
                   value={selectedStockItemId}
                   onChange={(e) => setSelectedStockItemId(e.target.value)}
-                  className="w-full text-xs bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"
+                  className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 font-medium cursor-pointer"
                 >
                   {stock.map((item) => (
                     <option key={item.id} value={item.id}>
@@ -508,7 +508,7 @@ export const PurchasesModule: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-xs text-slate-300 mb-1">Quantidade</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">Quantidade</label>
                   <input
                     type="number"
                     step="0.5"
@@ -516,15 +516,15 @@ export const PurchasesModule: React.FC = () => {
                     required
                     value={poQuantity}
                     onChange={(e) => setPoQuantity(e.target.value)}
-                    className="w-full text-xs font-mono bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"
+                    className="w-full text-xs font-mono font-bold bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-slate-300 mb-1">Forma de Pagamento</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">Forma de Pagamento</label>
                   <select
                     value={poPaymentMethod}
                     onChange={(e) => setPoPaymentMethod(e.target.value as any)}
-                    className="w-full text-xs bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"
+                    className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 font-medium cursor-pointer"
                   >
                     <option value="BOLETO">Boleto Bancário</option>
                     <option value="PIX">Pix</option>
@@ -534,13 +534,13 @@ export const PurchasesModule: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-xs text-slate-300 mb-1">Observações do Pedido</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Observações do Pedido</label>
                 <input
                   type="text"
                   placeholder="Ex: Entregar antes das 10h da manhã"
                   value={poNotes}
                   onChange={(e) => setPoNotes(e.target.value)}
-                  className="w-full text-xs bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"
+                  className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 font-medium"
                 />
               </div>
 
@@ -548,13 +548,13 @@ export const PurchasesModule: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsNewPoModalOpen(false)}
-                  className="px-4 py-2 text-xs text-slate-400 hover:text-white"
+                  className="px-4 py-2 text-xs font-bold text-slate-500 hover:text-slate-800 cursor-pointer"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl shadow-lg shadow-amber-500/20"
+                  className="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl shadow-xs cursor-pointer"
                 >
                   Salvar Ordem de Compra
                 </button>
@@ -566,39 +566,39 @@ export const PurchasesModule: React.FC = () => {
 
       {/* Modal: Novo Fornecedor */}
       {isNewSupModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-md p-6 shadow-2xl space-y-4">
-            <h3 className="text-base font-bold text-white">Cadastrar Novo Fornecedor</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
+          <div className="bg-white border border-slate-200/90 rounded-3xl w-full max-w-md p-6 sm:p-7 shadow-2xl space-y-4 text-slate-900">
+            <h3 className="text-base font-extrabold text-slate-900">Cadastrar Novo Fornecedor</h3>
             <form onSubmit={handleCreateSupplier} className="space-y-3">
               <div>
-                <label className="block text-xs text-slate-300 mb-1">Razão Social</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Razão Social</label>
                 <input
                   type="text"
                   required
                   placeholder="Ex: Distribuidora de Alimentos Sul Ltda"
                   value={supName}
                   onChange={(e) => setSupName(e.target.value)}
-                  className="w-full text-xs bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"
+                  className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 font-medium"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-xs text-slate-300 mb-1">Nome Fantasia</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">Nome Fantasia</label>
                   <input
                     type="text"
                     placeholder="Ex: Alimentos Sul"
                     value={supTradeName}
                     onChange={(e) => setSupTradeName(e.target.value)}
-                    className="w-full text-xs bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"
+                    className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 font-medium"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-slate-300 mb-1">Categoria</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">Categoria</label>
                   <select
                     value={supCategory}
                     onChange={(e) => setSupCategory(e.target.value as any)}
-                    className="w-full text-xs bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"
+                    className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 font-medium cursor-pointer"
                   >
                     <option value="CARNES">Carnes</option>
                     <option value="HORTIFRUTI">Hortifrúti</option>
@@ -612,23 +612,23 @@ export const PurchasesModule: React.FC = () => {
 
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-xs text-slate-300 mb-1">CNPJ</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">CNPJ</label>
                   <input
                     type="text"
                     placeholder="00.000.000/0001-00"
                     value={supCnpj}
                     onChange={(e) => setSupCnpj(e.target.value)}
-                    className="w-full text-xs font-mono bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"
+                    className="w-full text-xs font-mono bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-slate-300 mb-1">Telefone / WhatsApp</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">Telefone / WhatsApp</label>
                   <input
                     type="text"
                     placeholder="(11) 98888-7777"
                     value={supPhone}
                     onChange={(e) => setSupPhone(e.target.value)}
-                    className="w-full text-xs bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"
+                    className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900"
                   />
                 </div>
               </div>
@@ -637,13 +637,13 @@ export const PurchasesModule: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsNewSupModalOpen(false)}
-                  className="px-4 py-2 text-xs text-slate-400 hover:text-white"
+                  className="px-4 py-2 text-xs font-bold text-slate-500 hover:text-slate-800 cursor-pointer"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl shadow-lg shadow-amber-500/20"
+                  className="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl shadow-xs cursor-pointer"
                 >
                   Salvar Fornecedor
                 </button>

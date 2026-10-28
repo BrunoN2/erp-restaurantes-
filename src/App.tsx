@@ -3,6 +3,7 @@ import { AppProvider, useApp } from './context/AppContext';
 import { Sidebar } from './components/Sidebar';
 import { Header } from './components/Header';
 import { Toasts } from './components/Toasts';
+import { LoginScreen } from './components/LoginScreen';
 import { QuickSaleModal } from './components/modals/QuickSaleModal';
 import { ImportXmlModal } from './components/modals/ImportXmlModal';
 import { NewTransactionModal } from './components/modals/NewTransactionModal';
@@ -19,12 +20,22 @@ import { IntegrationsSecurityModule } from './components/modules/IntegrationsSec
 import { ShieldAlert, ArrowLeft } from 'lucide-react';
 
 const MainLayout: React.FC = () => {
-  const { activeTab, setActiveTab, currentUser, canAccess } = useApp();
+  const { isAuthenticated, activeTab, setActiveTab, currentUser, canAccess } = useApp();
 
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [isQuickSaleOpen, setIsQuickSaleOpen] = useState(false);
   const [isImportXmlOpen, setIsImportXmlOpen] = useState(false);
   const [isNewTxOpen, setIsNewTxOpen] = useState(false);
+
+  // If not logged in, render the beautiful Login Screen with the starry night background
+  if (!isAuthenticated) {
+    return (
+      <>
+        <LoginScreen />
+        <Toasts />
+      </>
+    );
+  }
 
   // Role permissions mapping
   const getRequiredRolesForTab = (tab: typeof activeTab) => {
@@ -53,7 +64,7 @@ const MainLayout: React.FC = () => {
   const hasAccess = canAccess(getRequiredRolesForTab(activeTab) as any);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col antialiased">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col antialiased selection:bg-amber-500 selection:text-slate-950 font-['Plus_Jakarta_Sans',sans-serif]">
       {/* Sidebar Navigation */}
       <Sidebar
         isOpenMobile={isMobileSidebarOpen}
@@ -73,21 +84,21 @@ const MainLayout: React.FC = () => {
         {/* Content Body */}
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
           {!hasAccess ? (
-            <div className="p-8 rounded-2xl bg-slate-900 border border-rose-500/30 text-center max-w-lg mx-auto my-12 space-y-4 shadow-2xl">
-              <div className="w-12 h-12 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center mx-auto">
+            <div className="p-8 rounded-3xl bg-white border border-rose-200 text-center max-w-lg mx-auto my-12 space-y-4 shadow-sm">
+              <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center mx-auto">
                 <ShieldAlert className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-bold text-white">Acesso Restrito pelo Controle RBAC</h3>
-              <p className="text-xs text-slate-400">
+              <h3 className="text-lg font-bold text-slate-900">Acesso Restrito pelo Controle RBAC</h3>
+              <p className="text-xs text-slate-500 leading-relaxed">
                 O seu perfil atual (<strong>{currentUser.role}</strong> - {currentUser.name}) não possui permissão para visualizar ou editar este módulo.
               </p>
               <div className="pt-2 flex justify-center gap-3">
                 <button
                   onClick={() => setActiveTab('DASHBOARD')}
-                  className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center gap-1.5"
+                  className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-all cursor-pointer"
                 >
                   <ArrowLeft className="w-4 h-4" />
-                  <span>Voltar ao Dashboard</span>
+                  <span>Voltar à Visão Geral</span>
                 </button>
               </div>
             </div>

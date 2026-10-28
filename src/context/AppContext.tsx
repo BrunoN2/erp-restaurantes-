@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import {
   UserProfile,
   UserRole,
+  UserAccount,
   FinancialTransaction,
   BankAccount,
   BankStatementItem,
@@ -45,6 +46,17 @@ import {
   INITIAL_AUDIT_LOGS
 } from '../data/initialData';
 
+export const INITIAL_ACCOUNTS: UserAccount[] = [
+  {
+    id: 'acc-1',
+    username: 'user123',
+    password: '12345678',
+    name: 'Carlos Oliveira (Admin)',
+    role: 'ADMIN',
+    createdAt: '2026-10-28'
+  }
+];
+
 interface Toast {
   id: string;
   type: 'success' | 'warning' | 'error' | 'info';
@@ -52,6 +64,13 @@ interface Toast {
 }
 
 interface AppContextType {
+  // Auth & Session
+  isAuthenticated: boolean;
+  login: (username: string, password: string) => boolean;
+  logout: () => void;
+  registeredAccounts: UserAccount[];
+  registerAccount: (acc: Omit<UserAccount, 'id' | 'createdAt'>) => boolean;
+
   activeTab: TabType;
   setActiveTab: (tab: TabType) => void;
   currentUser: UserProfile;
@@ -131,6 +150,25 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [activeTab, setActiveTab] = useState<TabType>('DASHBOARD');
   const [currentUser, setCurrentUser] = useState<UserProfile>(INITIAL_USERS[0]); // Admin by default
   const [toasts, setToasts] = useState<Toast[]>([]);
+
+  // Auth & Session
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem('MISE_AUTH_SESSION') === 'true';
+    } catch {
+      return false;
+    }
+  });
+
+  const [registeredAccounts, setRegisteredAccounts] = useState<UserAccount[]>(() => {
+    try {
+      const savedAccs = localStorage.getItem('MISE_ACCOUNTS');
+      if (savedAccs) return JSON.parse(savedAccs);
+    } catch (e) {
+      console.warn('Erro ao carregar contas:', e);
+    }
+    return INITIAL_ACCOUNTS;
+  });
 
   // Company info
   const [company, setCompany] = useState(INITIAL_COMPANY);
@@ -259,6 +297,65 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const updateCompany = (info: Partial<typeof INITIAL_COMPANY>) => {
     setCompany((prev) => ({ ...prev, ...info }));
     showToast('Dados da empresa atualizados com sucesso!', 'success');
+  };
+
+  const login = (username: string, password: string): boolean => {
+    const account = registeredAccounts.find(
+      (a) => a.username.trim() === username.trim() && a.password === password
+    );
+
+    if (account) {
+      setIsAuthenticated(true);
+      localStorage.setItem('MISE_AUTH_SESSION', 'true');
+      
+      // Update currentUser profile to match role if found
+      const matchedProfile = INITIAL_USERS.find((u) => u.role === account.role) || {
+        id: account.id,
+        name: account.name,
+        email: `${account.username}@mise.com.br`,
+        role: account.role,
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=faces'
+      };
+      setCurrentUser(matchedProfile);
+
+      addAuditLog('Login de Usuário', `Autenticado com sucesso como ${account.username} (${account.role})`, 'SEGURANCA');
+      showToast(`Bem-vindo ao Mise, ${account.name}!`, 'success');
+      return true;
+    }
+
+    showToast('Usuário ou senha incorretos. Tente: user123 / 12345678', 'error');
+    return false;
+  };
+
+  const logout = () => {
+    setIsAuthenticated(false);
+    localStorage.removeItem('MISE_AUTH_SESSION');
+    showToast('Sessão encerrada com sucesso.', 'info');
+  };
+
+  const registerAccount = (acc: Omit<UserAccount, 'id' | 'createdAt'>): boolean => {
+    if (registeredAccounts.some((a) => a.username.toLowerCase() === acc.username.toLowerCase())) {
+      showToast('Este nome de usuário já está cadastrado.', 'warning');
+      return false;
+    }
+
+    const newAcc: UserAccount = {
+      ...acc,
+      id: `acc-${Date.now()}`,
+      createdAt: new Date().toISOString().slice(0, 10)
+    };
+
+    const updated = [...registeredAccounts, newAcc];
+    setRegisteredAccounts(updated);
+    try {
+      localStorage.setItem('MISE_ACCOUNTS', JSON.stringify(updated));
+    } catch (e) {
+      console.warn('Erro ao salvar conta:', e);
+    }
+
+    addAuditLog('Novo Usuário Cadastrado', `${newAcc.username} - Função ${newAcc.role}`, 'SEGURANCA');
+    showToast(`Usuário "${newAcc.username}" cadastrado com sucesso!`, 'success');
+    return true;
   };
 
   // 1. Financeiro Actions
@@ -964,6 +1061,11 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   return (
     <AppContext.Provider
       value={{
+        isAuthenticated,
+        login,
+        logout,
+        registeredAccounts,
+        registerAccount,
         activeTab,
         setActiveTab,
         currentUser,

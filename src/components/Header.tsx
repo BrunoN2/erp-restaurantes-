@@ -6,10 +6,9 @@ import {
   Download,
   RotateCcw,
   Sparkles,
-  Search,
-  Bell,
-  CheckCircle2,
-  AlertTriangle
+  AlertTriangle,
+  LogOut,
+  User
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { TabType } from '../types';
@@ -30,27 +29,28 @@ export const Header: React.FC<HeaderProps> = ({
   const {
     activeTab,
     stock,
-    transactions,
     exportBackupJson,
-    resetAllData
+    resetAllData,
+    currentUser,
+    logout
   } = useApp();
 
   const getTabTitle = (tab: TabType) => {
     switch (tab) {
       case 'DASHBOARD':
         return {
-          title: 'Visão Geral & Indicadores Estratégicos',
-          desc: 'Monitoramento de DRE, fluxo de caixa unificado, CMV gastronômico e engenharia de cardápio'
+          title: 'Visão Geral & Rendimentos',
+          desc: 'Acompanhamento do gráfico de faturamento, DRE sintético e engenharia de cardápio'
         };
       case 'FINANCEIRO':
         return {
           title: 'Gestão Financeira & Tesouraria',
-          desc: 'Contas a pagar e receber, fluxo de caixa diário projetado e conciliação bancária de extrato'
+          desc: 'Contas a pagar e receber, fluxo de caixa diário e conciliação bancária'
         };
       case 'ESTOQUE':
         return {
           title: 'Controle de Estoque & Fichas Técnicas Vivas',
-          desc: 'Prevenção de ruptura, inventário, rastreabilidade e cálculo do CMV real com fator de correção'
+          desc: 'Prevenção de ruptura, inventário e recálculo do CMV real gastronômico'
         };
       case 'FISCAL':
         return {
@@ -86,22 +86,22 @@ export const Header: React.FC<HeaderProps> = ({
   const criticalStock = stock.filter((s) => s.currentStock <= s.minStock);
 
   return (
-    <header className="sticky top-0 z-30 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80 px-4 lg:px-8 py-3.5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <header className="sticky top-0 z-30 bg-white/85 backdrop-blur-md border-b border-slate-200/90 px-4 lg:px-8 py-3.5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
       {/* Left: Mobile Toggle & Title */}
       <div className="flex items-center gap-3">
         <button
           onClick={onOpenMobileSidebar}
-          className="lg:hidden p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:bg-slate-800"
+          className="lg:hidden p-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-900 hover:bg-slate-200"
           aria-label="Abrir menu lateral"
         >
           <Menu className="w-5 h-5" />
         </button>
 
         <div>
-          <h1 className="text-lg lg:text-xl font-bold text-white tracking-tight flex items-center gap-2">
+          <h1 className="text-lg lg:text-xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
             {title}
           </h1>
-          <p className="text-xs text-slate-400 hidden sm:block line-clamp-1">{desc}</p>
+          <p className="text-xs text-slate-500 hidden sm:block line-clamp-1 font-medium">{desc}</p>
         </div>
       </div>
 
@@ -109,7 +109,7 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="flex items-center flex-wrap gap-2">
         {/* Critical Alerts Counter */}
         {criticalStock.length > 0 && (
-          <div className="hidden xl:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-semibold animate-pulse">
+          <div className="hidden xl:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold animate-pulse">
             <AlertTriangle className="w-3.5 h-3.5" />
             <span>{criticalStock.length} itens em ruptura</span>
           </div>
@@ -118,16 +118,16 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Quick Action: Nova Venda */}
         <button
           onClick={onOpenQuickSale}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md shadow-emerald-600/20 transition-all"
+          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-xs transition-all cursor-pointer"
         >
           <PlusCircle className="w-3.5 h-3.5" />
-          <span>Nova Venda / Pedido</span>
+          <span>Nova Venda</span>
         </button>
 
         {/* Quick Action: Importar XML NF-e */}
         <button
           onClick={onOpenImportXml}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold shadow-md shadow-amber-500/20 transition-all"
+          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold shadow-xs transition-all cursor-pointer"
         >
           <FileUp className="w-3.5 h-3.5" />
           <span>Importar XML NF-e</span>
@@ -136,7 +136,7 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Quick Action: Novo Lançamento Financeiro */}
         <button
           onClick={onOpenNewTx}
-          className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold transition-all"
+          className="hidden md:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs font-semibold shadow-2xs transition-all cursor-pointer"
         >
           <span>+ Financeiro</span>
         </button>
@@ -145,7 +145,7 @@ export const Header: React.FC<HeaderProps> = ({
         <button
           onClick={exportBackupJson}
           title="Exportar Backup JSON completo"
-          className="p-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition-colors"
+          className="p-2 rounded-xl bg-white hover:bg-slate-50 text-slate-600 border border-slate-200 shadow-2xs transition-colors cursor-pointer"
         >
           <Download className="w-4 h-4" />
         </button>
@@ -158,9 +158,18 @@ export const Header: React.FC<HeaderProps> = ({
             }
           }}
           title="Restaurar dados de demonstração"
-          className="p-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-slate-200 border border-slate-800 transition-colors"
+          className="p-2 rounded-xl bg-white hover:bg-slate-50 text-slate-400 hover:text-slate-600 border border-slate-200 shadow-2xs transition-colors cursor-pointer"
         >
           <RotateCcw className="w-4 h-4" />
+        </button>
+
+        {/* Logout button */}
+        <button
+          onClick={logout}
+          title="Encerrar Sessão (Voltar ao Login)"
+          className="p-2 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-500 hover:text-rose-600 border border-slate-200/80 transition-colors cursor-pointer ml-1"
+        >
+          <LogOut className="w-4 h-4" />
         </button>
       </div>
     </header>

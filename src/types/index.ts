@@ -2,6 +2,15 @@
 
 export type UserRole = 'ADMIN' | 'FINANCEIRO' | 'ESTOQUE' | 'VENDAS' | 'RH';
 
+export interface UserAccount {
+  id: string;
+  username: string;
+  password: string; // Prototyping plaintext/stored
+  name: string;
+  role: UserRole;
+  createdAt: string;
+}
+
 export interface UserProfile {
   id: string;
   name: string;

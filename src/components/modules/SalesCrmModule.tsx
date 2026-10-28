@@ -34,10 +34,10 @@ export const SalesCrmModule: React.FC<{ onOpenQuickSale: () => void }> = ({ onOp
   const [custNotes, setCustNotes] = useState('');
 
   const stages: { id: DealStage; label: string; color: string }[] = [
-    { id: 'ORCAMENTO', label: '1. Orçamento / Lead', color: 'border-slate-600 bg-slate-900/50' },
-    { id: 'NEGOCIACAO', label: '2. Em Negociação', color: 'border-amber-500/50 bg-amber-950/20' },
-    { id: 'APROVADO', label: '3. Proposta Aprovada', color: 'border-blue-500/50 bg-blue-950/20' },
-    { id: 'CONCLUIDO', label: '4. Concluído / Faturado', color: 'border-emerald-500/50 bg-emerald-950/20' }
+    { id: 'ORCAMENTO', label: '1. Orçamento / Lead', color: 'border-slate-200 bg-slate-50/70' },
+    { id: 'NEGOCIACAO', label: '2. Em Negociação', color: 'border-amber-200 bg-amber-50/60' },
+    { id: 'APROVADO', label: '3. Proposta Aprovada', color: 'border-blue-200 bg-blue-50/60' },
+    { id: 'CONCLUIDO', label: '4. Concluído / Faturado', color: 'border-emerald-200 bg-emerald-50/60' }
   ];
 
   const handleCreateCustomer = (e: React.FormEvent) => {
@@ -76,34 +76,34 @@ export const SalesCrmModule: React.FC<{ onOpenQuickSale: () => void }> = ({ onOp
   return (
     <div className="space-y-6">
       {/* Sub-Navigation */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/80 pb-3">
-        <div className="flex items-center gap-1.5 p-1 bg-slate-900/90 rounded-xl border border-slate-800/80">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200/90 pb-3">
+        <div className="flex items-center gap-1.5 p-1 bg-white rounded-2xl border border-slate-200/90 shadow-2xs">
           <button
             onClick={() => setActiveSubTab('PIPELINE')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeSubTab === 'PIPELINE'
-                ? 'bg-amber-500 text-slate-950 shadow-sm'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-amber-500 text-slate-950 shadow-xs'
+                : 'text-slate-600 hover:text-slate-950 hover:bg-slate-50'
             }`}
           >
             Funil Comercial (Kanban)
           </button>
           <button
             onClick={() => setActiveSubTab('PEDIDOS')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeSubTab === 'PEDIDOS'
-                ? 'bg-amber-500 text-slate-950 shadow-sm'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-amber-500 text-slate-950 shadow-xs'
+                : 'text-slate-600 hover:text-slate-950 hover:bg-slate-50'
             }`}
           >
             Histórico de Pedidos ({saleOrders.length})
           </button>
           <button
             onClick={() => setActiveSubTab('CLIENTES')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeSubTab === 'CLIENTES'
-                ? 'bg-amber-500 text-slate-950 shadow-sm'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-amber-500 text-slate-950 shadow-xs'
+                : 'text-slate-600 hover:text-slate-950 hover:bg-slate-50'
             }`}
           >
             Base de Clientes & CRM ({customers.length})
@@ -114,7 +114,7 @@ export const SalesCrmModule: React.FC<{ onOpenQuickSale: () => void }> = ({ onOp
           {activeSubTab === 'CLIENTES' ? (
             <button
               onClick={() => setIsNewCustModalOpen(true)}
-              className="px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold flex items-center gap-1.5 shadow-md shadow-amber-500/20"
+              className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold flex items-center gap-1.5 shadow-xs transition-all cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Novo Cliente</span>
@@ -122,7 +122,7 @@ export const SalesCrmModule: React.FC<{ onOpenQuickSale: () => void }> = ({ onOp
           ) : (
             <button
               onClick={onOpenQuickSale}
-              className="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-md shadow-emerald-600/20"
+              className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-xs transition-all cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Nova Venda / Pedido</span>
@@ -141,16 +141,16 @@ export const SalesCrmModule: React.FC<{ onOpenQuickSale: () => void }> = ({ onOp
             return (
               <div
                 key={stg.id}
-                className={`p-4 rounded-2xl border ${stg.color} flex flex-col justify-between shadow-lg space-y-3 min-h-[420px]`}
+                className={`p-4 rounded-3xl border ${stg.color} flex flex-col justify-between shadow-2xs space-y-3 min-h-[420px]`}
               >
                 <div>
-                  <div className="flex items-center justify-between pb-2 border-b border-slate-800">
-                    <span className="text-xs font-bold text-white tracking-wide">{stg.label}</span>
-                    <span className="px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-slate-800 text-slate-300">
+                  <div className="flex items-center justify-between pb-2 border-b border-slate-200/80">
+                    <span className="text-xs font-extrabold text-slate-900 tracking-wide">{stg.label}</span>
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-white text-slate-700 shadow-2xs">
                       {stageOrders.length}
                     </span>
                   </div>
-                  <div className="text-[11px] text-slate-400 font-mono mt-1">
+                  <div className="text-[11px] text-slate-500 font-mono mt-1 font-semibold">
                     Total: R$ {totalStage.toFixed(2)}
                   </div>
 
@@ -159,24 +159,24 @@ export const SalesCrmModule: React.FC<{ onOpenQuickSale: () => void }> = ({ onOp
                     {stageOrders.map((order) => (
                       <div
                         key={order.id}
-                        className="p-3 rounded-xl bg-slate-950/80 border border-slate-800/80 space-y-2 hover:border-slate-700 transition-all shadow-md"
+                        className="p-3.5 rounded-2xl bg-white border border-slate-200/80 space-y-2 shadow-xs hover:shadow-md transition-all"
                       >
                         <div className="flex justify-between items-start">
-                          <span className="text-xs font-bold text-white">{order.customerName}</span>
-                          <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-300 font-semibold">
+                          <span className="text-xs font-extrabold text-slate-900">{order.customerName}</span>
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 font-bold">
                             {order.orderNumber}
                           </span>
                         </div>
 
-                        <div className="text-[11px] text-slate-400 line-clamp-2">
+                        <div className="text-[11px] text-slate-600 line-clamp-2">
                           {order.items.map((it) => `${it.quantity}x ${it.name}`).join(', ')}
                         </div>
 
-                        <div className="flex justify-between items-center pt-2 border-t border-slate-800/60">
-                          <span className="text-xs font-mono font-black text-emerald-400">
+                        <div className="flex justify-between items-center pt-2 border-t border-slate-100">
+                          <span className="text-xs font-mono font-black text-emerald-700">
                             R$ {order.totalAmount.toFixed(2)}
                           </span>
-                          <span className="text-[10px] text-slate-500">{order.channel}</span>
+                          <span className="text-[10px] text-slate-500 font-medium">{order.channel}</span>
                         </div>
 
                         {/* Stage Mover */}
@@ -189,7 +189,7 @@ export const SalesCrmModule: React.FC<{ onOpenQuickSale: () => void }> = ({ onOp
                                   updateSaleStage(order.id, stages[nextStageIndex].id);
                                 }
                               }}
-                              className="text-[10px] font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1 bg-slate-900 px-2 py-1 rounded border border-slate-800"
+                              className="text-[10px] font-bold text-amber-800 hover:text-amber-950 flex items-center gap-1 bg-amber-50 px-2 py-1 rounded-lg border border-amber-200 transition-colors cursor-pointer"
                             >
                               <span>Avançar Etapa</span>
                               <ArrowRight className="w-3 h-3" />
@@ -201,7 +201,7 @@ export const SalesCrmModule: React.FC<{ onOpenQuickSale: () => void }> = ({ onOp
                   </div>
                 </div>
 
-                <div className="pt-2 text-center text-[10px] text-slate-500">
+                <div className="pt-2 text-center text-[10px] text-slate-400 font-medium">
                   {stageOrders.length === 0 && 'Nenhuma oportunidade nesta etapa.'}
                 </div>
               </div>
@@ -212,46 +212,46 @@ export const SalesCrmModule: React.FC<{ onOpenQuickSale: () => void }> = ({ onOp
 
       {/* VIEW 2: Histórico de Pedidos */}
       {activeSubTab === 'PEDIDOS' && (
-        <div className="bg-slate-900/90 border border-slate-800/80 rounded-2xl overflow-hidden shadow-lg">
+        <div className="bg-white border border-slate-200/90 rounded-3xl overflow-hidden shadow-xs">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-950/70 border-b border-slate-800/80 text-slate-400 font-semibold uppercase text-[10px] tracking-wider">
+              <thead className="bg-slate-50/80 border-b border-slate-200/80 text-slate-500 font-bold uppercase text-[10px] tracking-wider">
                 <tr>
-                  <th className="py-3 px-4">Nº Pedido / Data</th>
-                  <th className="py-3 px-4">Cliente (CRM)</th>
-                  <th className="py-3 px-4">Canal</th>
-                  <th className="py-3 px-4">Itens & Quantidades</th>
-                  <th className="py-3 px-4 text-right">Valor Total</th>
-                  <th className="py-3 px-4">Pagamento</th>
-                  <th className="py-3 px-4 text-center">Etapa</th>
+                  <th className="py-3.5 px-4">Nº Pedido / Data</th>
+                  <th className="py-3.5 px-4">Cliente (CRM)</th>
+                  <th className="py-3.5 px-4">Canal</th>
+                  <th className="py-3.5 px-4">Itens & Quantidades</th>
+                  <th className="py-3.5 px-4 text-right">Valor Total</th>
+                  <th className="py-3.5 px-4">Pagamento</th>
+                  <th className="py-3.5 px-4 text-center">Etapa</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60">
+              <tbody className="divide-y divide-slate-100">
                 {saleOrders.map((ord) => (
-                  <tr key={ord.id} className="hover:bg-slate-800/40">
-                    <td className="py-3 px-4">
-                      <span className="font-mono font-bold text-white block">{ord.orderNumber}</span>
-                      <span className="text-[10px] text-slate-500 font-mono">{ord.date}</span>
+                  <tr key={ord.id} className="hover:bg-slate-50/80">
+                    <td className="py-3.5 px-4">
+                      <span className="font-mono font-bold text-slate-900 block">{ord.orderNumber}</span>
+                      <span className="text-[10px] text-slate-400 font-mono">{ord.date}</span>
                     </td>
-                    <td className="py-3 px-4 font-semibold text-slate-200">{ord.customerName}</td>
-                    <td className="py-3 px-4">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-300">
+                    <td className="py-3.5 px-4 font-bold text-slate-800">{ord.customerName}</td>
+                    <td className="py-3.5 px-4">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700">
                         {ord.channel}
                       </span>
                     </td>
-                    <td className="py-3 px-4 text-slate-300 max-w-xs truncate">
+                    <td className="py-3.5 px-4 text-slate-700 max-w-xs truncate font-medium">
                       {ord.items.map((it) => `${it.quantity}x ${it.name}`).join(' + ')}
                     </td>
-                    <td className="py-3 px-4 text-right font-mono font-bold text-emerald-400 text-sm">
+                    <td className="py-3.5 px-4 text-right font-mono font-black text-emerald-700 text-sm">
                       R$ {ord.totalAmount.toFixed(2)}
                     </td>
-                    <td className="py-3 px-4 text-slate-300">{ord.paymentMethod}</td>
-                    <td className="py-3 px-4 text-center">
+                    <td className="py-3.5 px-4 text-slate-600 font-medium">{ord.paymentMethod}</td>
+                    <td className="py-3.5 px-4 text-center">
                       <span
-                        className={`px-2 py-0.5 text-[10px] font-bold rounded-full ${
+                        className={`px-2.5 py-0.5 text-[10px] font-bold rounded-full ${
                           ord.stage === 'CONCLUIDO'
-                            ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
-                            : 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                            ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+                            : 'bg-amber-100 text-amber-800 border border-amber-200'
                         }`}
                       >
                         {ord.stage}
@@ -275,7 +275,7 @@ export const SalesCrmModule: React.FC<{ onOpenQuickSale: () => void }> = ({ onOp
               placeholder="Buscar cliente por nome, email ou CPF/CNPJ..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full text-xs bg-slate-950 border border-slate-700 rounded-lg pl-9 pr-3 py-2 text-white focus:outline-none focus:border-amber-500"
+              className="w-full text-xs bg-white border border-slate-200 rounded-xl pl-9 pr-3 py-2 text-slate-900 focus:outline-none focus:border-amber-500 font-medium"
             />
           </div>
 
@@ -283,52 +283,52 @@ export const SalesCrmModule: React.FC<{ onOpenQuickSale: () => void }> = ({ onOp
             {filteredCustomers.map((cust) => (
               <div
                 key={cust.id}
-                className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800/80 shadow-lg space-y-3 flex flex-col justify-between"
+                className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-xs space-y-3 flex flex-col justify-between hover:shadow-md transition-shadow"
               >
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
                     <span
-                      className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                      className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
                         cust.status === 'VIP'
-                          ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
-                          : 'bg-blue-500/20 text-blue-300'
+                          ? 'bg-amber-100 text-amber-900 border border-amber-200'
+                          : 'bg-blue-100 text-blue-900 border border-blue-200'
                       }`}
                     >
                       {cust.status === 'VIP' ? '★ CLIENTE VIP' : 'ATIVO'}
                     </span>
-                    <span className="text-[11px] font-mono text-slate-400">
+                    <span className="text-[11px] font-mono text-slate-500 font-semibold">
                       {cust.ordersCount} pedidos
                     </span>
                   </div>
 
-                  <h4 className="text-base font-bold text-white">{cust.name}</h4>
+                  <h4 className="text-base font-extrabold text-slate-900">{cust.name}</h4>
                   <p className="text-[11px] font-mono text-slate-400">{cust.document}</p>
 
-                  <div className="mt-3 space-y-1 text-xs text-slate-300">
+                  <div className="mt-3 space-y-1 text-xs text-slate-600">
                     <div className="flex items-center gap-2">
-                      <Mail className="w-3.5 h-3.5 text-slate-500" />
+                      <Mail className="w-3.5 h-3.5 text-slate-400" />
                       <span className="truncate">{cust.email}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Phone className="w-3.5 h-3.5 text-slate-500" />
+                      <Phone className="w-3.5 h-3.5 text-slate-400" />
                       <span>{cust.phone}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <MapPin className="w-3.5 h-3.5 text-slate-500" />
+                      <MapPin className="w-3.5 h-3.5 text-slate-400" />
                       <span className="truncate text-[11px]">{cust.address}</span>
                     </div>
                   </div>
 
                   {cust.notes && (
-                    <div className="mt-3 p-2 rounded-lg bg-slate-950/70 border border-slate-800 text-[11px] text-slate-400 italic">
+                    <div className="mt-3 p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-[11px] text-slate-600 italic">
                       "{cust.notes}"
                     </div>
                   )}
                 </div>
 
-                <div className="pt-3 border-t border-slate-800 flex items-center justify-between">
-                  <span className="text-[11px] text-slate-400">Gasto Total (LTV)</span>
-                  <span className="font-mono font-black text-emerald-400 text-sm">
+                <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+                  <span className="text-[11px] text-slate-500 font-medium">Gasto Total (LTV)</span>
+                  <span className="font-mono font-black text-emerald-700 text-sm">
                     R$ {cust.totalSpent.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                   </span>
                 </div>
@@ -340,75 +340,75 @@ export const SalesCrmModule: React.FC<{ onOpenQuickSale: () => void }> = ({ onOp
 
       {/* Modal: Novo Cliente */}
       {isNewCustModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-md p-6 shadow-2xl space-y-4">
-            <h3 className="text-base font-bold text-white">Cadastrar Novo Cliente no CRM</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
+          <div className="bg-white border border-slate-200/90 rounded-3xl w-full max-w-md p-6 sm:p-7 shadow-2xl space-y-4 text-slate-900">
+            <h3 className="text-base font-extrabold text-slate-900">Cadastrar Novo Cliente no CRM</h3>
             <form onSubmit={handleCreateCustomer} className="space-y-3">
               <div>
-                <label className="block text-xs text-slate-300 mb-1">Nome Completo / Empresa</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Nome Completo / Empresa</label>
                 <input
                   type="text"
                   required
                   placeholder="Ex: Dra. Mariana Ramos"
                   value={custName}
                   onChange={(e) => setCustName(e.target.value)}
-                  className="w-full text-xs bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"
+                  className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 font-medium"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <label className="block text-xs text-slate-300 mb-1">Email</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">Email</label>
                   <input
                     type="email"
                     placeholder="email@dominio.com"
                     value={custEmail}
                     onChange={(e) => setCustEmail(e.target.value)}
-                    className="w-full text-xs bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"
+                    className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-slate-300 mb-1">Telefone / WhatsApp</label>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">Telefone / WhatsApp</label>
                   <input
                     type="text"
                     placeholder="(11) 99999-9999"
                     value={custPhone}
                     onChange={(e) => setCustPhone(e.target.value)}
-                    className="w-full text-xs bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"
+                    className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs text-slate-300 mb-1">CPF ou CNPJ</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">CPF ou CNPJ</label>
                 <input
                   type="text"
                   placeholder="000.000.000-00"
                   value={custDoc}
                   onChange={(e) => setCustDoc(e.target.value)}
-                  className="w-full text-xs font-mono bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"
+                  className="w-full text-xs font-mono bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900"
                 />
               </div>
 
               <div>
-                <label className="block text-xs text-slate-300 mb-1">Endereço Completo</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Endereço Completo</label>
                 <input
                   type="text"
                   placeholder="Rua, Número, Bairro, Cidade"
                   value={custAddress}
                   onChange={(e) => setCustAddress(e.target.value)}
-                  className="w-full text-xs bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"
+                  className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900"
                 />
               </div>
 
               <div>
-                <label className="block text-xs text-slate-300 mb-1">Preferências & Notas</label>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Preferências & Notas</label>
                 <input
                   type="text"
                   placeholder="Ex: Prefere mesa perto da adega, vinho tinto, etc."
                   value={custNotes}
                   onChange={(e) => setCustNotes(e.target.value)}
-                  className="w-full text-xs bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-white"
+                  className="w-full text-xs bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900"
                 />
               </div>
 
@@ -416,13 +416,13 @@ export const SalesCrmModule: React.FC<{ onOpenQuickSale: () => void }> = ({ onOp
                 <button
                   type="button"
                   onClick={() => setIsNewCustModalOpen(false)}
-                  className="px-4 py-2 text-xs text-slate-400 hover:text-white"
+                  className="px-4 py-2 text-xs font-bold text-slate-500 hover:text-slate-800 cursor-pointer"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl shadow-lg shadow-amber-500/20"
+                  className="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl shadow-xs cursor-pointer"
                 >
                   Salvar Cliente
                 </button>
